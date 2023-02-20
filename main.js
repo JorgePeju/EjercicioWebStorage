@@ -31,25 +31,25 @@ const arrayCompra = [
 
 const arrayProductos = JSON.parse(localStorage.getItem("arrayCompra")) || [] ;
 
-console.log('arrayProductos',arrayProductos)
+console.log("arrayProductos",arrayProductos)
 
 
 
 // EVENTOS
 
-document.addEventListener('click',(ev)=>{
+document.addEventListener("click",(ev)=>{
 
-        if(ev.target.matches('.add')){
+        if(ev.target.matches(".add")){
             const id=ev.target.parentElement.id
             const producto=arrayCompra.find((item)=>item.id==id);
             arrayProductos.push(producto);
             addLocal();
-        }else if(ev.target.matches('.del')){
+        }else if(ev.target.matches(".del")){
             const id=ev.target.parentElement.id
             const producto1=arrayCompra.find((item)=>item.id==id);
             arrayProductos.pop(producto1);
             addLocal();
-        } else if(ev.target.matches('.vaciar')){
+        } else if(ev.target.matches(".vaciar")){
             arrayProductos.length = 0;
             localStorage.removeItem("productos");
         }
@@ -63,23 +63,23 @@ document.addEventListener('click',(ev)=>{
 
 const pintarEnLista= ()=>{
     arrayCompra.forEach(({id,nombre})=>{
-        lista.innerHTML+= `<li id=${id}>${nombre} <button class='add'>Añadir</button> </li>`
+        lista.innerHTML+= `<li id=${id}>${nombre} <button class="add">Añadir</button> </li>`
     });
 };
 
 const pintarEnCesta= ()=>{
-    compra.innerHTML='';
+    compra.innerHTML="";
 
     arrayProductos.forEach(({id,nombre})=>{
-        compra.innerHTML+= `<li id=${id}>${nombre} <button class='del'>Borrar</button> </li>`
+        compra.innerHTML+= `<li id=${id}>${nombre} <button class="del">Borrar</button> </li>`
     });
     if (arrayProductos.length > 0) {
-        compra.innerHTML += `<div><button class='vaciar'>Vaciar Cesta</button></div>`;
+        compra.innerHTML += `<div><button class="vaciar">Vaciar Cesta</button></div>`;
     };
 };
 
 const addLocal= ()=>{
-    localStorage.setItem('productos',JSON.stringify(arrayProductos))
+    localStorage.setItem("productos",JSON.stringify(arrayProductos))
 };
  
 document.addEventListener("DOMContentLoaded", () => {
