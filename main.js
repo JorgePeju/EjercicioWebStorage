@@ -85,7 +85,5 @@ const addLocal= ()=>{
 document.addEventListener("DOMContentLoaded", () => {
 
     pintarEnLista();
-   // addLocal();
-
-    
+  
 });
