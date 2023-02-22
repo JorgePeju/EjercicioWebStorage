@@ -11,20 +11,16 @@ const lista=document.querySelector("#lista-compra");
 const compra=document.querySelector("#cesta-compra")
 const arrayCompra = [
     {
-        id: "a1",
-        nombre: "pan"
+        id: "a1", nombre: "pan"
     },
      {
-        id: "a2",
-        nombre: "fruta"
+        id: "a2", nombre: "fruta"
     },
     {
-        id: "a3",
-        nombre: "queso"
+        id: "a3", nombre: "queso"
     },
     {
-        id: "a4",
-        nombre: "pescao"
+        id: "a4", nombre: "pescao"
     }
 
 ];
@@ -41,20 +37,19 @@ document.addEventListener("click",(ev)=>{
 
         if(ev.target.matches(".add")){
             const id=ev.target.parentElement.id
-            const producto=arrayCompra.find((item)=>item.id==id);
-            arrayProductos.push(producto);
-            addLocal();
+            pintarEnCesta();
+            addCesta(id);
         }else if(ev.target.matches(".del")){
             const id=ev.target.parentElement.id
-            const producto1=arrayCompra.find((item)=>item.id==id);
-            arrayProductos.pop(producto1);
-            addLocal();
+            sacarCesta(id);
+            pintarEnCesta();
         } else if(ev.target.matches(".vaciar")){
             arrayProductos.length = 0;
             localStorage.removeItem("productos");
+            pintarEnCesta();
         }
 
-        pintarEnCesta();
+    
         
 })
 
@@ -69,7 +64,7 @@ const pintarEnLista= ()=>{
 
 const pintarEnCesta= ()=>{
     compra.innerHTML="";
-
+    
     arrayProductos.forEach(({id,nombre})=>{
         compra.innerHTML+= `<li id=${id}>${nombre} <button class="del">Borrar</button> </li>`
     });
@@ -78,12 +73,32 @@ const pintarEnCesta= ()=>{
     };
 };
 
+const guardarLocal = () =>{
+
+    return JSON.parse(localStorage.getItem("arrayCompra")) || [];
+}
+
 const addLocal= ()=>{
-    localStorage.setItem("productos",JSON.stringify(arrayProductos))
+    localStorage.setItem("arrayCompra",JSON.stringify(arrayProductos))
 };
  
+const addCesta = (id) =>{
+
+    const producto=arrayCompra.find((item)=>item.id==id);
+    arrayProductos.push(producto);
+
+
+}
+
+const sacarCesta = (id) =>{
+
+    const producto1=arrayCompra.find((item)=>item.id==id);
+    arrayProductos.pop(producto1);
+    addLocal()
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 
     pintarEnLista();
-  
+    pintarEnCesta()
 });
