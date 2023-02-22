@@ -1,0 +1,18 @@
+body {
+    display: flex;
+  }
+  
+  #lista-compra {
+    width: 50%;
+    margin-right: 10px;
+  }
+  
+  #cesta-compra {
+    width: 50%;
+  }
+  
+  button {
+    margin-left: 10px;
+    display: block;
+    margin-bottom: 10px;
+  }
