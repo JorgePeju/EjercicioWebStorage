@@ -27,7 +27,15 @@ const arrayCompra = [
 
 const arrayProductos = JSON.parse(localStorage.getItem("arrayCompra")) || [] ;
 
-console.log("arrayProductos",arrayProductos)
+// for (let i = 0; i < arrayProductos.length; i++) {
+//     arrayProductos[i].cantidad = 1;
+//   }
+
+arrayProductos.forEach((producto, index) => {
+    if (producto.id === id) {
+      arrayProductos[index] = { id, nombre };
+    }
+  });
 
 
 
@@ -39,6 +47,7 @@ document.addEventListener("click",(ev)=>{
             const id=ev.target.parentElement.id
             pintarEnCesta();
             addCesta(id);
+        //    mismaCantidad(id);
         }else if(ev.target.matches(".del")){
             const id=ev.target.parentElement.id
             sacarCesta(id);
@@ -66,7 +75,7 @@ const pintarEnCesta= ()=>{
     compra.innerHTML="";
     
     arrayProductos.forEach(({id,nombre})=>{
-        compra.innerHTML+= `<li id=${id}>${nombre} <button class="del">Borrar</button> </li>`
+        compra.innerHTML+= `<li id=${id}>${nombre} <button class="add">Añadir</button><button class="del">Borrar</button> </li>`
     });
     if (arrayProductos.length > 0) {
         compra.innerHTML += `<div><button class="vaciar">Vaciar Cesta</button></div>`;
@@ -96,6 +105,22 @@ const sacarCesta = (id) =>{
     arrayProductos.pop(producto1);
     addLocal()
 }
+
+
+// const mismaCantidad = (id) => {
+//     let existeProducto = arrayProductos.find((producto) => producto.id === id);
+  
+//     if (existeProducto) {
+//         existeProducto.cantidad++;
+//     } else {
+//       let producto = arrayCompra.find((item) => item.id === id);
+//       producto.cantidad = 1;
+//       arrayProductos.push(producto);
+//     }
+  
+//     addLocal();
+//   };
+
 
 document.addEventListener("DOMContentLoaded", () => {
 
